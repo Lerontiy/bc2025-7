@@ -1,24 +1,24 @@
 {
-  "name": "bc2025-6",
+  "name": "bc2025-7",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon main.js --host 0.0.0.0 --port 3000 --cache ./cache",
+    "dev": "nodemon main.js --host localhost --port 3000 --cache ./cache",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lerontiy/bc2025-6.git"
+    "url": "git+https://github.com/Lerontiy/bc2025-7.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Lerontiy/bc2025-6/issues"
+    "url": "https://github.com/Lerontiy/bc2025-7/issues"
   },
-  "homepage": "https://github.com/Lerontiy/bc2025-6#readme",
+  "homepage": "https://github.com/Lerontiy/bc2025-7#readme",
   "devDependencies": {
     "nodemon": "^3.1.11"
   },

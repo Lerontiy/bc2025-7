@@ -1,5 +1,5 @@
-node_modules/
-cache/
+node_modules
+cache
 *.docx
 *.pdf
 main1.js
