@@ -1,0 +1,279 @@
+{
+	"info": {
+		"_postman_id": "f56abbab-20cb-410c-b9d8-fffa1b035c33",
+		"name": "Інвентаризація",
+		"description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50257448",
+		"_collection_link": "https://oleksandrnazarenko24-7854848.postman.co/workspace/%D0%BE%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80-%D0%BD%D0%B0%D0%B7%D0%B0%D1%80%D0%B5%D0%BD%D0%BA%D0%BE's-Workspace~5019093a-2d2f-4c2e-8cb8-2b3c379d0971/collection/50257448-f56abbab-20cb-410c-b9d8-fffa1b035c33?action=share&source=collection_link&creator=50257448"
+	},
+	"item": [
+		{
+			"name": "Форма реєстрація",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/RegisterForm.html",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"RegisterForm.html"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Форма пошук",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/SearchForm.html",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"SearchForm.html"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Додати",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "inventory_name",
+							"value": "Синя ручка",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "8грн",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "postman-cloud:///1f0c6d29-f4a1-46b0-9aff-6eeb198f7a56"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server}}/register",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"register"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Пошук",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "{{ruchka_id}}",
+							"type": "text"
+						},
+						{
+							"key": "has_photo",
+							"value": "on",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server}}/search",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Подивитись інвентар",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();\r",
+							"if (data.length>0) {\r",
+							"    var ruchka_id = data[0].id;\r",
+							"    pm.environment.set(\"ruchka_id\", ruchka_id);\r",
+							"    console.log(\"Збережено ruchka_id.\");\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/inventory",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"inventory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Подивитись фото ручка",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/inventory/{{ruchka_id}}/photo",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"inventory",
+						"{{ruchka_id}}",
+						"photo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Подивитись ручка",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/inventory/{{ruchka_id}}",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"inventory",
+						"{{ruchka_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Оновити фото ручка",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "postman-cloud:///1f0c6c83-cb72-4600-bea1-b7d04e5bd1e4"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server}}/inventory/{{ruchka_id}}/photo",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"inventory",
+						"{{ruchka_id}}",
+						"photo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Оновити ручка",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":{{ruchka_id}},\r\n    \"name\": \"Червона ручка\",\r\n    \"description\": \"10 грн\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/inventory/{{ruchka_id}}",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"inventory",
+						"{{ruchka_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Видалити ручка",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/inventory/{{ruchka_id}}",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"inventory",
+						"{{ruchka_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
