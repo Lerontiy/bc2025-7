@@ -24,7 +24,7 @@ app.use(express.json()); app.use(express.urlencoded({ extended: true })); app.us
 app.get(['/RegisterForm.html', '/SearchForm.html'], (req, res) => res.sendFile(path.join(dir, req.path)));
 
 /** @swagger /register: { post: { summary: Add Item, requestBody: { content: { 'multipart/form-data': { schema: { type: 'object', properties: { inventory_name: { type: 'string' }, description: { type: 'string' }, photo: { type: 'string', format: 'binary' } }, required: ['inventory_name'] } } } }, responses: { 201: { description: Created }, 400: { description: Bad Request } } } } */
-app.post('/register', upload.single('photo'), (req, res) => req.body.inventory_name ? (db.push({ id: `${Date.now()}`, name: req.body.inventory_name, description: req.body.description || '', photo: req.file?.filename }) && res.sendStatus(201)) : res.sendStatus(400));
+app.post('/register', upload.single('photo'), (req, res) => req.body.inventory_name ? (db.push({ id: `${db.length+1}`, name: req.body.inventory_name, description: req.body.description || '', photo: req.file?.filename }) && res.sendStatus(201)) : res.sendStatus(400));
 
 /** @swagger /inventory: { get: { summary: List Items, responses: { 200: { description: Array of items, content: { 'application/json': { schema: { type: 'array', items: { $ref: '#/components/schemas/Item' } } } } } } } } */
 app.get('/inventory', (req, res) => res.json(db.map(i => ({ ...i, photoUrl: i.photo ? `${url}/inventory/${i.id}/photo` : null }))));
