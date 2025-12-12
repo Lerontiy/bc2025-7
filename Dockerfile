@@ -17,4 +17,5 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 USER node
 COPY . .
 EXPOSE 3000
-CMD ["/bin/sh", "-c", "npm run debug"]
+#CMD ["/bin/sh", "-c", "npm run debug"]
+CMD ["/bin/sh", "-c", "npm run dev"]

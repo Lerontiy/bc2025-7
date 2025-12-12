@@ -156,13 +156,13 @@ app.post('/search', async (req, res) => {
 });
 
 app.use((req, res) => {
-    //console.log("2");
+    console.log("1");
     res.sendStatus(405)
 });
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 async function initializeDBAndStartServer() {
-    await sleep(2000);
+    await sleep(5000);
     sequelize.authenticate()
         .then(async () => {
             console.log("З'єднання з БД встановлено.");
