@@ -155,11 +155,20 @@ app.post('/search', async (req, res) => {
     }
 });
 
-app.use((req, res) => res.sendStatus(405));
+app.use((req, res) => {
+    //console.log("2");
+    res.sendStatus(405)
+});
 
-sequelize.authenticate()
-    .then(async () => {
-        console.log("З'єднання з БД встановлено.");
-        app.listen(port, host, () => console.log(`Сервер запущено: ${url}\nКеш: ${path.resolve(cache)}\nНатисни Ctrl+C для зупинки.`));
-    })
-    .catch(error => console.log("Помилка з'єднання з БД:", error));
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+async function initializeDBAndStartServer() {
+    await sleep(2000);
+    sequelize.authenticate()
+        .then(async () => {
+            console.log("З'єднання з БД встановлено.");
+            app.listen(port, host, () => console.log(`Сервер запущено: ${url}\nКеш: ${path.resolve(cache)}\nНатисни Ctrl+C для зупинки.`));
+        })
+        .catch(error => console.log("Помилка з'єднання з БД:", error));
+}
+
+initializeDBAndStartServer();

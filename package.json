@@ -5,8 +5,8 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon main.js --host 0.0.0.0 --port 3000 --cache ./cache",
-    "dev1": "nodemon main.js",
+    "dev": "nodemon -L main.js --host 0.0.0.0 --port 3000 --cache ./cache",
+    "debug": "node --inspect=0.0.0.0:9229 main.js --host 0.0.0.0 --port 3000 --cache ./cache",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
