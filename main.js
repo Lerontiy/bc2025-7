@@ -41,7 +41,7 @@ const app = express();
 app.use(express.json()); app.use(express.urlencoded({ extended: true })); app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerOptions)));
 
 /** @swagger /{file}: { get: { summary: Get HTML Forms, parameters: [{ name: 'file', in: 'path', required: true, schema: { type: 'string', enum: ['RegisterForm.html', 'SearchForm.html'] } }], responses: { 200: { description: HTML File, content: { 'text/html': {} } } } } } */
-app.get(['/RegisterForm.html', '/SearchForm.html'], (req, res) => res.sendFile(path.join(dir, req.path)));
+app.get(['/RegisterForm.html', '/SearchForm.html'], (req, res) => res.sendFile(path.join(dir, "src/public/"+req.path)));
 
 /** @swagger /register: { post: { summary: Add Item, requestBody: { content: { 'multipart/form-data': { schema: { type: 'object', properties: { inventory_name: { type: 'string' }, description: { type: 'string' }, photo: { type: 'string', format: 'binary' } }, required: ['inventory_name'] } } } }, responses: { 201: { description: Created }, 400: { description: Bad Request } } } } */
 app.post('/register', upload.single('photo'), async (req, res) => {
