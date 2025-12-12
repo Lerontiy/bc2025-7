@@ -5,7 +5,8 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon main.js --host localhost --port 3000 --cache ./cache",
+    "dev": "nodemon main.js --host 0.0.0.0 --port 3000 --cache ./cache",
+    "dev1": "nodemon main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,9 +24,13 @@
     "nodemon": "^3.1.11"
   },
   "dependencies": {
+    "@types/node": "^25.0.0",
     "commander": "^14.0.2",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "multer": "^2.0.2",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7",
     "superagent": "^10.2.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"

@@ -8,13 +8,29 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
+  db:
+    image: postgres
+    restart: always
+    env_file: ./.env
+    environment:
+      POSTGRES_USER: $DB_USER 
+      POSTGRES_PASSWORD: $DB_PASSWORD 
+      POSTGRES_DB: $DB_NAME
+    volumes:
+      - ./data:/var/lib/postgresql
+      - ./initdb.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "$DB_PORT:$DB_PORT"
   server:
+    depends_on: 
+      - db
     build:
       context: .
     environment:
       NODE_ENV: production
     volumes:
       - ./:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
       - 3000:3000
 

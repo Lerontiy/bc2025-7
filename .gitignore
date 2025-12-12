@@ -3,3 +3,6 @@ cache
 *.docx
 *.pdf
 main1.js
+main2.js
+.env
+data
